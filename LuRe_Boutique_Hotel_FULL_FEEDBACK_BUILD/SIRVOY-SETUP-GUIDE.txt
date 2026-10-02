@@ -1,0 +1,198 @@
+LURe BOUTIQUE HOTEL — SIRVOY SETUP GUIDE
+==========================================
+
+1. PROPERTY BASICS
+------------------
+In Sirvoy, first complete the property name, address, contact details, currency,
+taxes and booking settings.
+
+Recommended LuRe accommodation structure:
+
+ROOM TYPE A: LuRe Signature Room
+- Create ONE room type named "LuRe Signature Room".
+- Add the 9 individual physical rooms under that room type.
+- Use the actual hotel room numbers/IDs, not generic IDs, so staff can recognize them.
+- Set the correct maximum guests and nightly rate.
+- Add the real room photos and description.
+- Confirm breakfast/taxes/rate rules with the hotel before going live.
+
+ROOM TYPE B: LuRe Two-Bedroom Apartment Suite
+- Create ONE room type named "LuRe Two-Bedroom Apartment Suite" if all three apartments
+  have the same amenities and rate structure.
+- Add 3 individual apartments/units under this room type.
+- If the 3 apartments differ materially in amenities or price, create separate room types.
+- Use the real unit IDs/numbers.
+
+Important:
+The Conference Room should remain a separate enquiry/request product unless LuRe decides
+to sell it like accommodation. Do not map the Conference Room to Booking.com/Expedia/Airbnb
+as a guest room unless that is intentionally how the hotel wants to sell it.
+
+2. ADD ROOM TYPES AND ROOMS
+---------------------------
+Sirvoy:
+Settings > Accommodations > Add New
+
+For each room type:
+- Name
+- Description
+- Guest capacity
+- Price
+- Other restrictions/settings
+Save.
+
+Then next to the room type:
+New Room
+Add each physical room/unit with its real Room ID.
+
+3. TEST THE PMS FIRST
+---------------------
+Before connecting any external channel:
+- Enter all existing direct/manual reservations.
+- Make sure the Sirvoy calendar is correct.
+- Block any unavailable rooms/dates.
+- Make a test booking internally.
+- Confirm room assignment, dates, guest count and rates.
+
+4. ADD THE SIRVOY BOOKING ENGINE TO THIS WEBSITE
+------------------------------------------------
+In Sirvoy:
+Web tools > Booking engines
+Click the three dots (...) next to the booking engine
+Choose Install
+Choose "Your website (JavaScript)"
+Copy the code Sirvoy generates.
+
+In this website:
+Open booking.html
+Find:
+SIRVOY BOOKING ENGINE INTEGRATION POINT
+
+Delete the fallback <div class="sirvoy-slot"...> block and paste the Sirvoy
+booking engine code in that exact location.
+
+The "Reserve Your Stay" and "Check Availability" buttons are already routed to booking.html.
+
+IMPORTANT:
+The code supplied by the client:
+<script async data-form-id="aeec96c0f944a661" src="https://secured.sirvoy.com/widget/sirvoy.js" data-lang="en" data-widget="review"></script>
+is a REVIEW widget, not the booking engine. It is already placed on the Home page
+under Guest Reviews.
+
+5. CONNECT BOOKING.COM
+----------------------
+Before starting:
+- Make sure Sirvoy room availability/restrictions are correct.
+- Make sure Booking.com room types are active.
+- Find the Booking.com Property ID.
+
+In Sirvoy:
+Settings > Channels > Booking.com > Connect Property
+Enter the Booking.com Property ID and a connection name.
+
+In Booking.com:
+Account > Connectivity Provider
+Search for Sirvoy
+Sirvoy partner ID: 289
+Select Sirvoy.
+Enable Extranet access if requested.
+
+Back in Sirvoy:
+Map each Booking.com room type to the matching Sirvoy room type.
+Save/finalize the mapping.
+
+Existing future Booking.com reservations are imported automatically when the
+connection is activated.
+
+6. CONNECT EXPEDIA
+------------------
+Before starting:
+- Find the Expedia Property ID.
+- Sirvoy's current guide says Expedia pricing should use OBP
+  (Occupancy Based Pricing) and LAR (Lowest Available Rate).
+- Make sure Sirvoy availability is correct.
+
+In Sirvoy:
+Settings > Channels > Expedia > Connect property
+Enter the Property ID and a connection name.
+
+In Expedia Partner Central:
+Rooms and Rates > Connectivity Settings
+Select Sirvoy.
+Enable BOTH:
+- Availability and rates
+- Booking retrieval
+Save.
+
+Sirvoy will then provide the next steps.
+Map the Expedia room types to the corresponding Sirvoy room types.
+Import existing Expedia reservations as directed during setup.
+
+7. CONNECT AIRBNB
+-----------------
+Before starting:
+- Use an Airbnb ADMIN account; a co-host cannot complete the mapping.
+- Make sure each Airbnb listing matches the right Sirvoy room type.
+
+If multiple Airbnb listings are IDENTICAL:
+Example: several identical Signature Rooms
+They can be represented in Sirvoy by one room type containing multiple rooms.
+
+If listings are materially DIFFERENT:
+Create separate Sirvoy room types before mapping them.
+
+Connection:
+Log into Airbnb.
+In another tab log into Sirvoy.
+Sirvoy > Settings > Channels > Airbnb > Connect Property
+Approve the connection.
+Map each Airbnb listing to the correct Sirvoy room type.
+Save.
+Import existing Airbnb bookings using the connection flow.
+
+Important:
+Airbnb currently uses Instant Book when connected through Sirvoy's direct API connection.
+
+8. HOW CENTRAL AVAILABILITY WORKS
+---------------------------------
+Once Booking.com, Expedia and Airbnb are connected, Sirvoy becomes the central source
+for availability and prices.
+
+Example:
+- Guest books a Signature Room on Booking.com.
+- The reservation enters Sirvoy.
+- That room/date becomes unavailable.
+- Sirvoy sends the new remaining availability to the other connected channels.
+
+Direct website bookings through the Sirvoy booking engine also update Sirvoy and the
+connected channels.
+
+This greatly reduces the risk of double bookings, but no channel manager can honestly
+guarantee that overbookings are impossible in every edge case. Test everything before launch.
+
+9. RECOMMENDED GO-LIVE ORDER FOR LURE
+-------------------------------------
+1. Add all room types and physical rooms.
+2. Enter/import all existing bookings.
+3. Verify the Sirvoy calendar.
+4. Configure rates and restrictions.
+5. Add the Sirvoy booking engine to booking.html.
+6. Make a direct test booking.
+7. Connect Booking.com and verify mapping.
+8. Connect Expedia and verify mapping.
+9. Connect Airbnb and verify mapping.
+10. Test a date change / cancellation / blocked room.
+11. Only then actively sell inventory on all channels.
+
+10. GOOGLE MAPS
+---------------
+The client's feedback says the current pin is incorrect.
+Do NOT guess the exact map pin.
+Ask the client to open the correct LuRe location in Google Maps and send the Share link.
+Then replace the temporary address-search URL on contact.html with that verified link.
+
+11. EMAIL ACCESS
+----------------
+Give the client their own Zoho mailbox/login (for example reservations@lureboutiquehotel.com).
+Do not share the main administrator password.
+Have the client change their password at first login.
